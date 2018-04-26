@@ -10,6 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<Fish> fishAdapter;
     List<Fish> fishList;
     FishFirebaseData fishDataSource;
-//    DatabaseReference myFishDbRef;
+    DatabaseReference myFishDbRef;
     int positionSelected;
     Fish fishSelected;
 
@@ -28,14 +33,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //setupFirebaseDataChange();
+        setupFirebaseDataChange();
         setupListView();
         setupAddButton();
         setupDetailButton();
         setupDeleteButton();
     }
 
-    /*
     private void setupFirebaseDataChange() {
         fishDataSource = new FishFirebaseData();
         myFishDbRef = fishDataSource.open();
@@ -55,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    */
 
     private void setupListView() {
         listViewFish = (ListView) findViewById(R.id.ListViewFish);
@@ -102,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("MAIN", "onClick for Delete");
                 Log.d("MAIN", "Delete at position " + positionSelected);
-//                fishDataSource.deleteFish(fishList.get(positionSelected));
+                fishDataSource.deleteFish(fishList.get(positionSelected));
                 fishAdapter.remove( fishList.get(positionSelected) );
                 fishAdapter.notifyDataSetChanged();
             }
