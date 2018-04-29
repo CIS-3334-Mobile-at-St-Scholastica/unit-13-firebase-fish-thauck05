@@ -7,8 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class DetailActivity extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
 
+public class DetailActivity extends AppCompatActivity {
 
     Button buttonBack;
     EditText editTextSpecies, editTextWeight, editTextDate, editTextLocation;
